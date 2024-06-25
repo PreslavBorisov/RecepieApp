@@ -10,25 +10,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun RecipeScreen(modifier: Modifier = Modifier,
-                 viewState:RecipeState,
-                 navigateToDetail:(Category)->Unit
+                 viewState:MainViewModel.RecipeState,
+                 navigateToDetail: (Category)->Unit
 ){
-    val recipeViewModel: MainViewModel= viewModel()
 
     Box(modifier = Modifier.fillMaxSize()){
         when{
@@ -65,9 +61,10 @@ fun CategoryItem(category: Category,
                  navigateToDetail:(Category)->Unit
 ){
     
-    Column(modifier = Modifier
+    Column(
+        modifier = Modifier
         .padding(8.dp)
-        .fillMaxSize().clickable {  },
+        .fillMaxSize().clickable { navigateToDetail(category) },
         horizontalAlignment = Alignment.CenterHorizontally) {
         
         Image(

@@ -16,33 +16,32 @@ class MainViewModel: ViewModel() {
         fetchCategory()
     }
 
-private fun fetchCategory(){
-    viewModelScope.launch {
-        try {
-            val response = recipeService.getCategories()
-            _categoriesState.value=_categoriesState.value.copy(
-                loading = false,
-                list = response.categories,
-                error = null
-            )
+    private fun fetchCategory(){
+        viewModelScope.launch {
+            try {
+                val response = recipeService.getCategories()
+                _categoriesState.value=_categoriesState.value.copy(
+                    loading = false,
+                    list = response.categories,
+                    error = null
+                )
 
-        }catch (e: Exception){
-            _categoriesState.value = _categoriesState.value.copy(
-                loading = false,
-                list = emptyList(),
-                error = "Error fetching a Category ${e.message}"
-            )
+            }catch (e: Exception){
+                _categoriesState.value = _categoriesState.value.copy(
+                    loading = false,
+                    list = emptyList(),
+                    error = "Error fetching a Category ${e.message}"
+                )
+
+            }
 
         }
-
     }
+    data class RecipeState(
+        val loading: Boolean =true,
+        val list: List<Category> = emptyList(),
+        val error: String? = null
+    )
 }
 
-}
 
-
-data class RecipeState(
-    val loading: Boolean =true,
-    val list: List<Category> = emptyList(),
-    val error: String? = null
-)
