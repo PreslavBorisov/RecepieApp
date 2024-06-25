@@ -21,8 +21,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun RecipeScreen(modifier: Modifier = Modifier,
-                 viewState:MainViewModel.RecipeState,
+fun RecipeScreen(viewState:MainViewModel.RecipeState,
                  navigateToDetail: (Category)->Unit
 ){
 
